@@ -64,6 +64,28 @@ module.exports = {
                 // type: 'asset/resource' // 发送一个单独的文件并导出 URL
                 // type: 'asset/inline' // 导出一个资源的 data URI
             },
+            // { // webpack5默认内部不认识这些文件, 所以当做静态资源直接输出即可
+            //     test: /\.(eot|svg|ttf|woff|woff2)$/,
+            //     type: 'asset/resource',
+            //     generator: {
+            //         filename: 'font-[name].[hash:6][ext]'
+            //     }
+            // },
+            { // 处理字体图标的解析
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                    use: [
+                        {
+                            loader: 'url-loader',
+                            options: {
+                                limit: 2 * 1024,
+                                // 配置输出的文件名
+                                name: '[name].[ext]',
+                                // 配置输出的文件目录
+                                outputPath: "fonts/"
+                            }
+                        }
+                    ]
+            }
         ]
     }
 }
