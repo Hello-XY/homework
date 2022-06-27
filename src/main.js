@@ -1,4 +1,5 @@
 import './index'
+import './style/index.css'
 
 // jq的使用
 // src/mains.js
