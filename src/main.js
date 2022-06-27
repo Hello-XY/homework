@@ -9,3 +9,9 @@ import './assets/fonts/iconfont.css'
 // 先引入jquery
 import $ from 'jquery';
 // $('#swiper').css('background-color', 'red')
+
+class App {
+    static a = 123
+}
+
+console.log(App.a)
