@@ -40,6 +40,18 @@ module.exports = {
                 // css-loader 再把css代码转换成webpack 可以识别的js代码
                 // style-loader 在把css代码插入到 dom中
                 use: ["style-loader", "css-loader", 'less-loader']
+            },
+            {
+                test: /\.(png|jpg|gif|jpeg)$/,
+                use: [
+                    {
+                        loader: 'url-loader', // 匹配文件, 尝试转base64字符串打包到js中
+                        // 配置limit, 超过8k, 不转, file-loader复制, 随机名, 输出文件
+                        options: {
+                            limit: 8 * 1024,
+                        },
+                    },
+                ],
             }
         ]
     }
