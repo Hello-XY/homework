@@ -3,6 +3,7 @@ const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 module.exports = {
     entry: "./src/main.js", // 入口
@@ -14,10 +15,12 @@ module.exports = {
     plugins: [ // 插件是字段 plugins 里配置
         new HtmlWebpackPlugin({
             template: './public/index.html', // 告诉webpack使用插件时, 以我们自己的html文件作为模板去生成dist/html文件
-            filename: 'index.html' // 生成文件的名称
+            filename: 'index.html',// 生成文件的名称
+
         }),
         new CleanWebpackPlugin(), // 删除的是ouput path 里配置的那个输出文件的文件夹
         // 默认情况下dist
+        new VueLoaderPlugin()
     ],
     devServer: {
         port: 3000, // 端口号
@@ -95,9 +98,13 @@ module.exports = {
                         presets: ['@babel/preset-env'] // 预设:转码规则(用bable开发环境本来预设的)
                     }
                 }
-            }
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
         ]
-    }
+    },
 }
 // __dirname 可以用来动态获取当前文件所属目录的绝对路径
 // /Users/maohuihui/Desktop/vue-base/code/day_01/03_webpack配置_修改入口和出口
